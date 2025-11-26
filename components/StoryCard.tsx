@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import VideoPlayer from './VideoPlayer';
 
 const StoryCard = ({ data }: { data: Testimonial }) => {
 
@@ -18,15 +19,19 @@ const StoryCard = ({ data }: { data: Testimonial }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
-      className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
+      className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full"
     >
       <div className={`h-2 w-full bg-linear-to-r ${randomGradient}`} />
       <div className="p-6 flex-1 flex flex-col">
+        {data.videoUrl && (
+          <div className="mb-4 -mx-6 -mt-6">
+            <VideoPlayer src={data.videoUrl} className="aspect-video" />
+          </div>
+        )}
         <div className="flex items-center justify-between mb-4">
           <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider rounded-full">
             {data.addiction}
           </span>
-      
         </div>
         <p className="text-slate-600 mb-6 flex-1 leading-relaxed text-sm md:text-base">
           &#34;{data.testimony}&#34;

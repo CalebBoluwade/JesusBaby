@@ -30,17 +30,20 @@ export default function ContactPage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="container mx-auto p-8 bg-white rounded-3xl shadow-xl border border-slate-100"
+      className="p-8 h-screen"
     >
-      <h2 className="text-4xl font-bold text-center">
-        <PhoneCall className="w-7 h-7 text-red-500" /> Find Support and Guidance
-      </h2>
+      <div className="--flex items-center">
+        <h2 className="text-4xl font-bold text-center">
+          <PhoneCall className="w-7 h-7 text-red-500" /> Find Support and
+          Guidance
+        </h2>
 
-      <h3 className="text-xl font-semibold text-red-700 mb-4">
-        Urgent Support Hotlines. If you are in immediate distress, please reach
-        out. You are not alone. These mock resources represent places where you
-        can find **immediate, confidential help**.
-      </h3>
+        <h3 className="text-xl font-semibold text-red-700 mb-4">
+          Urgent Support Hotlines. If you are in immediate distress, please
+          reach out. You are not alone. These mock resources represent places
+          where you can find **immediate, confidential help**.
+        </h3>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto">
         <div className="bg-white p-6 rounded-lg shadow-lg border-b-4 border-red-600">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -9,28 +9,6 @@ import {
   PopoverContent,
 } from "@/components/ui/popover";
 import StoryCard from "@/components/StoryCard";
-
-// const testimonials = [
-//   {
-//     id: 1,
-//     name: "John D.",
-
-//     verse: "2 Corinthians 5:17",
-//     verseText: "Therefore, if anyone is in Christ, he is a new creation. The old has passed away; behold, the new has come."
-//   },
-//   {
-//     id: 2,
-//     name: "Sarah M.",
-//     verse: "Psalm 34:17-18",
-//     verseText: "The righteous cry out, and the Lord hears them; he delivers them from all their troubles. The Lord is close to the brokenhearted and saves those who are crushed in spirit."
-//   },
-//   // {
-//     //   id: 3,
-//     //   name: "Michael T.",
-//     //   verse: "John 8:36",
-//     //   verseText: "So if the Son sets you free, you will be free indeed."
-//     // }
-//   ];
 
 // Mock user data with headshots
 const users: Testimonial[] = [
@@ -138,6 +116,7 @@ const users: Testimonial[] = [
     name: "Zoe Martinez",
     image:
       "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
+    videoUrl: "/videos/5199861-hd_1080_1920_25fps.mp4",
     addiction: "Alcohol",
     testimony:
       "Through Jesus Christ, I was delivered from 15 years of alcohol addiction. His grace is sufficient!",
@@ -145,7 +124,15 @@ const users: Testimonial[] = [
 ];
 
 export default function CollagePage() {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  // const [hoveredId, setHoveredId] = useState<number | null>(null);
+
+  if (!users || users.length === 0) {
+    return (
+      <div className="rounded-lg p-8 bg-white shadow text-center">
+        No testimonies yet — be the first to share!
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100">
@@ -176,18 +163,16 @@ export default function CollagePage() {
                 type: "spring",
                 stiffness: 100,
               }}
-              onHoverStart={() => setHoveredId(user.id!)}
-              onHoverEnd={() => setHoveredId(null)}
             >
               <Popover>
                 <PopoverTrigger asChild>
-                  <Avatar className="w-20 h-20 border-4 border-white shadow-lg transition-colors hover:border-indigo-200">
+                  <Avatar className="w-18 h-18 border-4 border-white shadow-lg transition-colors hover:border-indigo-200">
                     <AvatarImage
                       src={user.image}
                       alt={user.name}
                       className="object-cover"
                     />
-                    <AvatarFallback className="bg-gradient-to-br from-indigo-400 to-purple-500 text-white font-semibold">
+                    <AvatarFallback className="bg-linear-to-br from-indigo-400 to-purple-500 text-white font-semibold">
                       {user.name
                         .split(" ")
                         .map((n) => n[0])
@@ -195,7 +180,7 @@ export default function CollagePage() {
                     </AvatarFallback>
                   </Avatar>
                 </PopoverTrigger>
-                <PopoverContent>
+                <PopoverContent asChild>
                   <StoryCard data={user} />
                 </PopoverContent>
               </Popover>

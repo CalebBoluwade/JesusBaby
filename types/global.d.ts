@@ -1,3 +1,4 @@
+
 global {
   // --- Types ---
   interface Testimonial {
@@ -6,9 +7,26 @@ global {
     image: string;
     addiction: string;
     testimony: string;
-    // verse: string;
-    // verseText: string;
+    videoUrl?: string;
     // createdAt: string;
+  }
+
+  interface BibleVerseReference {
+    id: number;
+    title: string;
+    book: string;
+    verse: string;
+    verseText: string;
+  }
+
+  interface Project {
+    id: number;
+    brandName: string;
+    name: string;
+    description: string;
+    imageUrl: string;
+    projectUrl: string;
+    comingSoon?: boolean;
   }
 
   // interface User {

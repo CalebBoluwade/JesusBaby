@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Navigation } from "./Navigation";
-import { NavigationProvider } from "./NavigationProvider";
+import { Footer } from "./Footer";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -10,9 +10,10 @@ interface ClientLayoutProps {
 
 export const ClientLayout = ({ children }: ClientLayoutProps) => {
   return (
-    <NavigationProvider>
+    <>
       <Navigation />
       {children}
-    </NavigationProvider>
+      <Footer />
+    </>
   );
 };
