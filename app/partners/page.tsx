@@ -3,13 +3,13 @@
 import ProjectCard from "@/components/ProjectCard";
 import { motion } from "framer-motion";
 import {
-  Gift,
-  Handshake,
-  DollarSign,
-  Mail,
   BookMarked,
   Church,
   Flame,
+  Lock,
+  Heart,
+  Users,
+  Zap
 } from "lucide-react";
 import { useState } from "react";
 import SalvationAltarCallModal from "@/components/SalvationAltarCallModal";
@@ -59,6 +59,13 @@ export default function PartnersPage() {
     },
   ];
 
+  const colorMap: Record<string, string> = {
+    "from-red-500 to-pink-500": "text-red-500",
+    "from-indigo-500 to-purple-500": "text-indigo-500",
+    "from-emerald-500 to-teal-500": "text-emerald-500",
+    "from-amber-500 to-orange-500": "text-amber-500",
+  };
+
   const partnerOptions = [
     {
       id: "alterCall",
@@ -67,55 +74,49 @@ export default function PartnersPage() {
       icon: Flame,
       color: "from-red-500 to-pink-500",
     },
-
     {
       id: "bible",
       title: "Read a Bible",
       description: "Support our mission by reading a bible chapter today",
       icon: BookMarked,
-      color: "from-red-500 to-pink-500",
+      color: "from-emerald-500 to-emerald-700",
     },
     {
       id: "church",
       title: "Church",
-      description: "Attend your local church",
+      description: "Attend a local church",
       icon: Church,
-      color: "from-red-500 to-pink-500",
+      color: "from-amber-500 to-orange-500",
+    },
+    {
+      id: "partner",
+      title: "Get in Touch. Become a Partner",
+      description: "Inquire about partnership opportunities, Join us in spreading the love of Jesus, hope and deliverance",
+      icon: Users,
+      color: "from-indigo-500 to-purple-500",
     },
     {
       id: "donate",
       title: "Make a Donation",
       description: "Support our mission with a financial contribution",
-      icon: Gift,
+      icon: Heart,
       color: "from-red-500 to-pink-500",
-    },
-    {
-      id: "partner",
-      title: "Become a Partner",
-      description: "Join us in spreading hope and deliverance",
-      icon: Handshake,
-      color: "from-indigo-500 to-purple-500",
+      disabled: true,
     },
     {
       id: "sponsor",
       title: "Sponsor a Program",
       description: "Fund specific recovery and support initiatives",
-      icon: DollarSign,
+      icon: Zap,
       color: "from-emerald-500 to-teal-500",
-    },
-    {
-      id: "contact",
-      title: "Get in Touch",
-      description: "Inquire about partnership opportunities",
-      icon: Mail,
-      color: "from-amber-500 to-orange-500",
-    },
+      disabled: true,
+    }
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col lg:flex-row">
+    <div className="h-[calc(100dvh-64px)] flex flex-col lg:flex-row">
       {/* Left Side - Partners */}
-      <div className="w-full lg:w-3/4 bg-white px-6 py-8 border-r overflow-y-scroll border-slate-200">
+      <div className="w-full lg:w-3/4 px-6 py-8 border-r overflow-y-scroll border-slate-200">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -168,12 +169,14 @@ export default function PartnersPage() {
           {partnerOptions.map((option, index) => {
             const Icon = option.icon;
             const isSelected = selectedOption === option.id;
+            const isDisabled = option.disabled;
             return (
               <motion.button
                 key={option.id}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
+                disabled={isDisabled}
                 onClick={() => {
                   if (option.id === "alterCall") {
                     setAltarCallOpen(true);
@@ -181,22 +184,31 @@ export default function PartnersPage() {
                     setSelectedOption(isSelected ? null : option.id);
                   }
                 }}
-                className={`w-full px-3 py-6 rounded-xl border-2 transition-all text-left ${
-                  isSelected
+                className={`w-full px-3 py-4 rounded-xl border-2 transition-all text-left ${
+                  isDisabled
+                    ? `border-slate-600 bg-slate-700/30 opacity-50 cursor-not-allowed`
+                    : isSelected
                     ? `border-white bg-white/10 backdrop-blur-sm`
                     : `border-white/20 hover:border-white/40 bg-white/5`
                 }`}
               >
                 <div className="flex items-start gap-4">
-                  <div
-                    className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 bg-linear-to-br ${option.color}`}
+                  <motion.div
+                    whileHover={!isDisabled ? { scale: 1.2, rotate: 5 } : {}}
+                    className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
                   >
-                    <Icon className="w-6 h-6" />
-                  </div>
+                    {isDisabled ? (
+                      <Lock className="w-8 h-8 text-slate-400" />
+                    ) : (
+                      <Icon className={`w-8 h-8 ${colorMap[option.color]}`} />
+                    )}
+                  </motion.div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold mb-1">{option.title}</h3>
-                    <p className="text-slate-300 text-sm">
-                      {option.description}
+                    <p className={`text-sm ${
+                      isDisabled ? "text-slate-400" : "text-slate-300"
+                    }`}>
+                      {isDisabled ? "Coming soon" : option.description}
                     </p>
                   </div>
                 </div>
