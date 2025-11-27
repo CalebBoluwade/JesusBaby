@@ -32,6 +32,6 @@ async function initializeDb() {
   }
 }
 
-initializeDb();
+// initializeDb();
 
 export { dbConn, db };
