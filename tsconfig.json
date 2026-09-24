@@ -19,10 +19,10 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
-  "types": ["bun-types"],
+  "types": ["@types/bun", "bun-types"],
   "include": [
     "next-env.d.ts",
     "**/*.ts",

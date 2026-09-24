@@ -25,7 +25,7 @@ global {
     name: string;
     description: string;
     imageUrl: string;
-    projectUrl: string;
+    projectUrl: string | "modal";
     comingSoon?: boolean;
   }
 

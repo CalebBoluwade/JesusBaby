@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="80" fill="#6366f1" opacity="0.1"/>
+  <circle cx="1100" cy="530" r="100" fill="#06b6d4" opacity="0.1"/>
+  
+  <!-- Cross symbol -->
+  <g transform="translate(150, 315)">
+    <rect x="-20" y="-80" width="40" height="160" fill="url(#textGrad)" rx="8"/>
+    <rect x="-80" y="-20" width="160" height="40" fill="url(#textGrad)" rx="8"/>
+    <circle cx="0" cy="0" r="15" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Main text -->
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white">
+    JesusBaby
+  </text>
+  
+  <!-- Tagline -->
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="48" fill="#e2e8f0">
+    Freedom Found in Christ
+  </text>
+  
+  <!-- Description -->
+  <text x="400" y="360" font-family="Arial, sans-serif" font-size="32" fill="#cbd5e1">
+    Real Stories. Real Deliverance. Real Hope.
+  </text>
+  
+  <!-- CTA -->
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="28" fill="#06b6d4" font-weight="bold">
+    Launching January 1st
+  </text>
+</svg>
