@@ -47,7 +47,7 @@ export async function GET(
 
   const range = req.headers.get("range");
   if (!range) {
-    const body = Readable.toWeb(createReadStream(file)) as ReadableStream;
+    const body = Readable.toWeb(createReadStream(file)) as unknown as ReadableStream;
     return new Response(body, { status: 200, headers: { ...base, "Content-Length": String(size) } });
   }
 
@@ -69,7 +69,7 @@ export async function GET(
   }
   if (start > end || start >= size) return invalid();
 
-  const body = Readable.toWeb(createReadStream(file, { start, end })) as ReadableStream;
+  const body = Readable.toWeb(createReadStream(file, { start, end })) as unknown as ReadableStream;
   return new Response(body, {
     status: 206,
     headers: {

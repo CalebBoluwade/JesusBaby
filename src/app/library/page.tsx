@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -27,6 +28,22 @@ const libraryOptions = [
     accent: "bg-amber-100 text-amber-800",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "Library — JesusBaby",
+  description: "Explore faith-centered books for seasons of growth, hope, and transformation. Ask about digital downloads or printed editions.",
+  keywords: ["Christian books", "faith library", "digital downloads", "printed books", "Jesus", "spiritual growth"],
+  openGraph: {
+    title: "Library — JesusBaby",
+    description: "Explore faith-centered books for seasons of growth, hope, and transformation.",
+    url: "https://jesusbaby.com/library",
+    siteName: "JesusBaby",
+    type: "website",
+    images: [{ url: "https://jesusbaby.com/og-image.svg", width: 1200, height: 630, alt: "JesusBaby Library" }],
+  },
+  twitter: { card: "summary_large_image", title: "Library — JesusBaby", description: "Explore faith-centered books for seasons of growth, hope, and transformation.", images: ["https://jesusbaby.com/og-image.svg"] },
+  alternates: { canonical: "https://jesusbaby.com/library" },
+};
 
 export default function LibraryPage() {
   return (

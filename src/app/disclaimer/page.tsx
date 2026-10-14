@@ -1,3 +1,21 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Disclaimer — JesusBaby",
+  description: "Read our disclaimer on testimonies, books, and resources shared on JesusBaby. All content is for faith-based and informational purposes.",
+  keywords: ["disclaimer", "JesusBaby", "testimonies", "faith resources", "terms"],
+  openGraph: {
+    title: "Disclaimer — JesusBaby",
+    description: "Read our disclaimer on testimonies, books, and resources shared on JesusBaby.",
+    url: "https://jesusbaby.com/disclaimer",
+    siteName: "JesusBaby",
+    type: "website",
+    images: [{ url: "https://jesusbaby.com/og-image.svg", width: 1200, height: 630, alt: "JesusBaby" }],
+  },
+  twitter: { card: "summary_large_image", title: "Disclaimer — JesusBaby", description: "Read our disclaimer on testimonies, books, and resources shared on JesusBaby.", images: ["https://jesusbaby.com/og-image.svg"] },
+  alternates: { canonical: "https://jesusbaby.com/disclaimer" },
+};
+
 export default function Disclaimer() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8" style={{ background: "#0f0f0f" }}>

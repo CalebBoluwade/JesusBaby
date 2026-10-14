@@ -141,6 +141,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* light mode overrides — toggled by next-themes via html.light */
+html.light body {
+  background: #f8f8f5;
+  color: #1a1a1a;
+}
+html.light {
+  --bg: #f8f8f5;
+  --panel: #efefeb;
+  --line: #ddddd8;
+  --lime: #5a8a00;
+  --muted: #6b6b6b;
+}
+html.light ::-webkit-scrollbar-thumb { background: #ccc; }
+html.light ::-webkit-scrollbar-thumb:hover { background: #5a8a00; }
+html.light * { scrollbar-color: #ccc transparent; }
 button,
 input {
   font: inherit;

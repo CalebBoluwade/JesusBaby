@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Headphones,
   Bookmark,
   Check,
   Clock3,
@@ -25,7 +24,6 @@ import {
   ChevronRight,
   Mic2,
   Radio,
-  MoreHorizontal,
   Heart,
   Shuffle,
   Repeat,
@@ -460,6 +458,44 @@ export default function PodcastApp() {
       return next;
     });
   }, []);
+
+  /* ── media session ── */
+  useEffect(() => {
+    if (typeof navigator === "undefined" || !("mediaSession" in navigator) || !playing) return;
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: playing.episode,
+      artist: playing.host,
+      album: playing.title,
+      artwork: playing.artworkUrl
+        ? [96, 128, 192, 256, 512].map((sz) => ({
+            src: playing.artworkUrl!,
+            sizes: `${sz}x${sz}`,
+            type: "image/jpeg",
+          }))
+        : [],
+    });
+
+    navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+
+    if (duration > 0) {
+      try {
+        navigator.mediaSession.setPositionState({
+          duration,
+          playbackRate: rate,
+          position: Math.min(currentTime, duration),
+        });
+      } catch { /* not all browsers support setPositionState */ }
+    }
+
+    navigator.mediaSession.setActionHandler("play", () => { void togglePlayback(); });
+    navigator.mediaSession.setActionHandler("pause", () => { void togglePlayback(); });
+    navigator.mediaSession.setActionHandler("previoustrack", () => skipTo(-1));
+    navigator.mediaSession.setActionHandler("nexttrack", () => skipTo(1));
+    navigator.mediaSession.setActionHandler("seekto", (d) => { if (d.seekTime != null) seek(d.seekTime); });
+    navigator.mediaSession.setActionHandler("seekbackward", (d) => { seek(Math.max(0, currentTime - (d.seekOffset ?? 10))); });
+    navigator.mediaSession.setActionHandler("seekforward", (d) => { seek(Math.min(duration, currentTime + (d.seekOffset ?? 10))); });
+  }, [playing, isPlaying, currentTime, duration, rate, togglePlayback, skipTo, seek]);
 
   /* ── derived ── */
   const categories = useMemo(

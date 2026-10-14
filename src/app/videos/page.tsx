@@ -1,58 +1,36 @@
-"use client";
+import type { Metadata } from "next";
+import VideosClient from "@/components/VideosClient";
 
-import React from "react";
-import { motion } from "framer-motion";
-import VideoGallery from "@/components/VideoGallery";
-
-const VIDEOS = [
-  {
-    id: "1",
-    title: "Testimony: Freedom from Addiction",
-    src: "/videos/testimony-1.mp4",
-    poster: "/videos/poster-1.jpg",
-    description: "A powerful testimony of deliverance through faith in Jesus.",
+export const metadata: Metadata = {
+  title: "Video Testimonies — JesusBaby",
+  description:
+    "Watch powerful video testimonies of transformation, deliverance, and faith in Jesus Christ.",
+  keywords: [
+    "video testimonies",
+    "Christian videos",
+    "deliverance",
+    "transformation",
+    "faith",
+    "Jesus",
+  ],
+  openGraph: {
+    title: "Video Testimonies — JesusBaby",
+    description:
+      "Watch powerful video testimonies of transformation, deliverance, and faith in Jesus Christ.",
+    url: "https://jesusbaby.com/videos",
+    siteName: "JesusBaby",
+    type: "website",
+    images: [{ url: "https://jesusbaby.com/og-image.svg", width: 1200, height: 630, alt: "Video Testimonies — JesusBaby" }],
   },
-  {
-    id: "2",
-    title: "Hope in Crisis",
-    src: "/videos/testimony-2.mp4",
-    poster: "/videos/poster-2.jpg",
-    description: "Finding hope and strength during life's darkest moments.",
+  twitter: {
+    card: "summary_large_image",
+    title: "Video Testimonies — JesusBaby",
+    description: "Watch powerful video testimonies of transformation and faith.",
+    images: ["https://jesusbaby.com/og-image.svg"],
   },
-  {
-    id: "3",
-    title: "Grace Transforms Lives",
-    src: "/videos/testimony-3.mp4",
-    poster: "/videos/poster-3.jpg",
-    description: "How God's grace can transform any life.",
-  },
-];
+  alternates: { canonical: "https://jesusbaby.com/videos" },
+};
 
 export default function VideosPage() {
-  return (
-    <div className="min-h-screen bg-slate-50 pt-24 pb-16">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Video Testimonies
-          </h1>
-          <p className="text-lg text-slate-600">
-            Watch powerful stories of transformation and faith.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <VideoGallery videos={VIDEOS} columns={3} />
-        </motion.div>
-      </div>
-    </div>
-  );
+  return <VideosClient />;
 }

@@ -2,22 +2,29 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, BookOpen, Share2, Heart, Users, AlertCircle, PenLine, LogOut, UserCircle, MoreHorizontal, ChevronDown, Library, Headphones } from "lucide-react";
+import { Menu, X, Sun, Moon, BookOpen, Share2, Heart, Users, AlertCircle, PenLine, LogOut, UserCircle, MoreHorizontal, ChevronDown, Library, Headphones } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { useTheme } from "next-themes";
 
 export const Navigation = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [navExpanded, setNavExpanded] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
   const { data: session, status } = useSession();
   const isPodcastPage = pathname === "/pods" || pathname.startsWith("/pods/");
   const isRouteActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
   useEffect(() => { setIsOpen(false); setIsMoreOpen(false); }, [pathname]);
+  useEffect(() => { setMounted(true); }, []);
+
+  const isLight = theme === "light";
+  const toggleTheme = () => setTheme(isLight ? "dark" : "light");
 
   const primaryNavItems = [
     { href: "/", label: "Home", icon: Sun },
@@ -146,6 +153,29 @@ export const Navigation = () => {
             {status === "unauthenticated" && (
               <Link href="/signin" className="border border-[#d7fb66]/40 px-3 py-2 text-xs font-bold text-[#d7fb66] hover:bg-[#d7fb66] hover:text-[#111] transition-colors">Sign in</Link>
             )}
+            {/* theme toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
+              className="ml-1 flex h-7 w-14 items-center rounded-full border border-[#2b2b2b] px-1 transition-colors"
+              style={{ background: isLight ? "#e8e8e4" : "#1a1a1a" }}
+            >
+              {mounted && (
+                <motion.span
+                  layout
+                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                  className="flex h-5 w-5 items-center justify-center rounded-full"
+                  style={{
+                    background: isLight ? "#fff" : "#2b2b2b",
+                    marginLeft: isLight ? "auto" : 0,
+                  }}
+                >
+                  {isLight
+                    ? <Sun className="h-3 w-3" style={{ color: "#5a8a00" }} />
+                    : <Moon className="h-3 w-3" style={{ color: "#d7fb66" }} />}
+                </motion.span>
+              )}
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -206,6 +236,14 @@ export const Navigation = () => {
                   Sign in
                 </Link>
               )}
+              <button
+                onClick={toggleTheme}
+                aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
+                className="flex items-center gap-3 px-3 py-2 text-sm font-medium text-[#888]"
+              >
+                {isLight ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                {isLight ? "Light mode" : "Dark mode"}
+              </button>
             </div>
           </motion.div>
         )}
