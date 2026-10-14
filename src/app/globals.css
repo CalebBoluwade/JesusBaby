@@ -76,6 +76,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  color-scheme: dark;
+  --bg: #101010;
+  --panel: #191919;
+  --muted: #929292;
+  --line: #2b2b2b;
+  --lime: #d7fb66;
 }
 
 .dark {
@@ -119,4 +126,178 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: #f5f5f2;
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+::selection {
+  background: var(--lime);
+  color: #111;
+}
+.shell {
+  width: min(1380px, calc(100% - 48px));
+  margin-inline: auto;
+}
+.muted {
+  color: var(--muted);
+}
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+}
+.cover {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, #ffffff0b, transparent 60%);
+}
+.cover-aurora {
+  background:
+    radial-gradient(circle at 25% 20%, #9bffad, transparent 34%),
+    linear-gradient(140deg, #1c5545, #132b31 55%, #0e1418);
+}
+.cover-sun {
+  background:
+    radial-gradient(circle at 72% 22%, #ffe6a1, transparent 26%),
+    linear-gradient(135deg, #f06e47, #8b2946 58%, #2e173a);
+}
+.cover-blue {
+  background:
+    radial-gradient(circle at 60% 30%, #a8d4ff, transparent 28%),
+    linear-gradient(135deg, #243c92, #171a37 60%, #090b17);
+}
+.cover-violet {
+  background:
+    radial-gradient(circle at 30% 28%, #ffb6e6, transparent 30%),
+    linear-gradient(145deg, #7b3fa5, #34204e 60%, #15111d);
+}
+.cover-gold {
+  background:
+    radial-gradient(circle at 70% 24%, #fff0a3, transparent 25%),
+    linear-gradient(135deg, #88652d, #45321f 58%, #17130e);
+}
+.cover-red {
+  background:
+    radial-gradient(circle at 72% 24%, #ff9b7a, transparent 27%),
+    linear-gradient(135deg, #9d2e28, #4e191d 60%, #1b1014);
+}
+.art-shape {
+  position: absolute;
+  border: 1px solid #ffffff60;
+  border-radius: 999px;
+  width: 64%;
+  aspect-ratio: 1;
+  right: -8%;
+  bottom: -20%;
+  transform: rotate(-20deg);
+}
+.art-shape::before,
+.art-shape::after {
+  content: "";
+  position: absolute;
+  inset: 10%;
+  border: 1px solid #ffffff55;
+  border-radius: inherit;
+}
+.art-shape::after {
+  inset: 22%;
+}
+.cover-word {
+  position: absolute;
+  left: 9%;
+  top: 10%;
+  max-width: 82%;
+  font-size: clamp(20px, 2.4vw, 38px);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.cover-tag {
+  position: absolute;
+  left: 10%;
+  bottom: 11%;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.episode-row:hover .episode-play {
+  opacity: 1;
+  transform: translateY(0);
+}
+.episode-play {
+  opacity: 0.82;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+.audio-range {
+  accent-color: #d7fb66;
+}
+.audio-range:focus-visible {
+  outline: 2px solid #d7fb66;
+  outline-offset: 4px;
+}
+
+/* ── custom scrollbars ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b2b2b;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d7fb66;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2b2b2b transparent;
+}
+*:hover {
+  scrollbar-color: #3a3a3a transparent;
 }

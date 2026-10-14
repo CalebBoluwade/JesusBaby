@@ -7,10 +7,10 @@ import VideoPlayer from './VideoPlayer';
 const StoryCard = ({ data }: { data: Testimonial }) => {
   const gradients = [
     "from-pink-500 to-rose-500",
-    "from-indigo-500 to-blue-500",
+    "from-amber-600 to-yellow-600",
     "from-emerald-500 to-teal-500",
     "from-amber-500 to-orange-500",
-    "from-violet-500 to-purple-500",
+    "from-amber-700 to-yellow-700",
   ];
   const randomGradient = gradients[data.name.length % gradients.length];
 
@@ -69,14 +69,14 @@ const StoryCard = ({ data }: { data: Testimonial }) => {
           <div className="flex gap-2">
             <button
               onClick={() => handleShare('linkedin')}
-              className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 hover:text-indigo-600"
+              className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 hover:text-amber-600"
               title="Share on LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
             </button>
             <button
               onClick={() => handleShare('twitter')}
-              className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 hover:text-blue-400"
+              className="p-2 rounded-full hover:bg-slate-100 transition-colors text-slate-600 hover:text-amber-700"
               title="Share on Twitter"
             >
               <Twitter className="w-4 h-4" />

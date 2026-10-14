@@ -16,7 +16,7 @@ export default function SharePage() {
     //         type="text"
     //         value={name}
     //         onChange={(e) => setName(e.target.value)}
-    //         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
+    //         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
     //         placeholder="e.g. John"
     //       />
     //     </div>
@@ -29,7 +29,7 @@ export default function SharePage() {
     //         type="text"
     //         value={addiction}
     //         onChange={(e) => setAddiction(e.target.value)}
-    //         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all"
+    //         className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all"
     //         placeholder="e.g. Gambling, Depression, Drugs"
     //       />
     //     </div>
@@ -44,7 +44,7 @@ export default function SharePage() {
     //       value={story}
     //       onChange={(e) => setStory(e.target.value)}
     //       rows={5}
-    //       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all resize-none"
+    //       className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition-all resize-none"
     //       placeholder="Share what changed and how Jesus helped you find freedom..."
     //     />
     //     <p className="text-xs text-slate-400 text-right">
@@ -56,7 +56,7 @@ export default function SharePage() {
     //     <label className="text-sm font-medium text-slate-700">
     //       Video Testimony (Optional)
     //     </label>
-    //     <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-indigo-500 transition-colors">
+    //     <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-amber-500 transition-colors">
     //       {!videoPreview ? (
     //         <div>
     //           <input
@@ -102,7 +102,7 @@ export default function SharePage() {
     //   <button
     //     type="submit"
     //     disabled={isSubmitting}
-    //     className="w-full py-4 bg-gradient-to-r from-indigo-600 to-violet-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:-translate-y-1 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+    //     className="w-full py-4 bg-gradient-to-r from-amber-600 to-yellow-600 text-white rounded-xl font-bold text-lg shadow-lg shadow-amber-200 hover:shadow-amber-300 hover:-translate-y-1 transition-all disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
     //   >
     //     {isSubmitting ? (
     //       <Activity className="w-5 h-5 animate-spin" />

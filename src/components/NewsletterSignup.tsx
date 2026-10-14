@@ -39,7 +39,7 @@ export default function NewsletterSignup() {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="py-16 px-6 bg-gradient-to-r from-indigo-600 to-cyan-600 text-white"
+      className="py-16 px-6 bg-gradient-to-r from-amber-800 to-yellow-700 text-white"
     >
       <div className="max-w-2xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -65,7 +65,7 @@ export default function NewsletterSignup() {
           <button
             type="submit"
             disabled={loading || submitted}
-            className="px-8 py-3 bg-white text-indigo-600 rounded-full font-bold hover:bg-white/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 whitespace-nowrap"
+            className="px-8 py-3 bg-white text-amber-800 rounded-full font-bold hover:bg-white/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 whitespace-nowrap"
           >
             {submitted ? (
               <>

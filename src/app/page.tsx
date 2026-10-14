@@ -18,7 +18,7 @@ const FEATURED_STORIES = [
     addiction: "Alcoholism",
     story:
       "Jesus stepped in when I hit rock bottom. The chains are broken, and I finally know what peace feels like through Him.",
-    color: "bg-blue-500",
+    color: "bg-amber-700",
     videoUrl: "/videos/5199861-hd_1080_1920_25fps.mp4",
   },
   {
@@ -36,7 +36,7 @@ const FEATURED_STORIES = [
     addiction: "Depression & Pills",
     story:
       "Fear controlled every breath, but I was delivered by God's truth. Now I wake up with a song in my heart instead of panic.",
-    color: "bg-purple-500",
+    color: "bg-amber-700",
     videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
   },
 ];
@@ -108,7 +108,7 @@ const HeroCarousel = ({
               className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
             >
               &#34;Freedom from{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-cyan-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-700 to-yellow-600">
                 {FEATURED_STORIES[current].addiction}
               </span>{" "}
               Found in Jesus&#34;
@@ -131,7 +131,7 @@ const HeroCarousel = ({
             >
               <button
                 onClick={() => router.push("/collage")}
-                className="px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors flex items-center gap-2"
+                className="px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors flex items-center gap-2"
               >
                 Read More Victories <ArrowRight className="w-4 h-4" />
               </button>
@@ -193,7 +193,7 @@ export default function Home() {
   const [countdownOpen, setCountdownOpen] = useState(true);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-indigo-100 selection:text-indigo-900 scroll-smooth snap-mandatory">
+    <div className="min-h-screen font-sans scroll-smooth snap-mandatory" style={{ background: "#101010", color: "#f5f5f2" }}>
       <LaunchCountdown open={countdownOpen} onOpenChange={setCountdownOpen} />
       <HeroCarousel onNewsletterClick={() => setNewsletterOpen(true)} />
       <Carousel />

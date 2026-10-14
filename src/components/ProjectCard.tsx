@@ -22,7 +22,7 @@ const ProjectCard = ({
   project: Project & { comingSoon?: boolean };
 }) => {
   return (
-    <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }} className="group relative block min-h-67.5 overflow-hidden rounded-2xl bg-black shadow-lg shadow-slate-900/10 transition-all hover:shadow-xl hover:shadow-indigo-950/20 dark:shadow-gray-700/25">
+    <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }} className="group relative block min-h-67.5 overflow-hidden rounded-2xl bg-black shadow-lg shadow-slate-900/10 transition-all hover:shadow-xl hover:shadow-amber-950/20 dark:shadow-gray-700/25">
       <motion.img
         alt={project.name}
         src={project.imageUrl}

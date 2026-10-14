@@ -106,8 +106,8 @@ export default function SalvationAltarCall() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-500/20 border border-indigo-500/50 mb-4">
-                  <step.icon className="w-6 h-6 text-indigo-400" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-700/20 border border-amber-700/50 mb-4">
+                  <step.icon className="w-6 h-6 text-amber-400" />
                 </div>
                 <h3 className="text-lg font-bold text-white mb-2">
                   {step.title}
@@ -117,7 +117,7 @@ export default function SalvationAltarCall() {
             ))}
           </div>
 
-          <div className="bg-linear-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-xl p-8 mb-8">
+          <div className="bg-linear-to-r from-amber-700/10 to-yellow-700/10 border border-amber-700/20 rounded-xl p-8 mb-8">
             <p className="text-slate-300 text-center leading-relaxed mb-6">
               If You&apos;re Ready To Give Your Life to Jesus, Pray This Prayer
               with a Sincere Heart:
@@ -232,25 +232,25 @@ export default function SalvationAltarCall() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="bg-indigo-500/10 border border-indigo-500/30 rounded-xl p-8"
+          className="bg-amber-700/10 border border-amber-700/30 rounded-xl p-8"
         >
           <h3 className="text-xl font-bold text-white mb-4">
             What Happens Next?
           </h3>
           <ul className="space-y-3 text-slate-300">
             <li className="flex gap-3">
-              <span className="text-indigo-400 font-bold">→</span>
+              <span className="text-amber-400 font-bold">→</span>
               <span>
                 You&apos;ll Receive a Welcome Email with Resources For Your New
                 Faith Journey
               </span>
             </li>
             <li className="flex gap-3">
-              <span className="text-indigo-400 font-bold">→</span>
+              <span className="text-amber-400 font-bold">→</span>
               <span>Connect with a local church community near you</span>
             </li>
             <li className="flex gap-3">
-              <span className="text-indigo-400 font-bold">→</span>
+              <span className="text-amber-400 font-bold">→</span>
               <span>
                 Get guidance on baptism, discipleship, and spiritual growth
               </span>

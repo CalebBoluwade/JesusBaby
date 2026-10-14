@@ -22,7 +22,7 @@ export default function NotFound() {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="mb-8"
         >
-          <div className="text-8xl font-bold text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-cyan-400 mb-4">
+          <div className="text-8xl font-bold text-transparent bg-clip-text bg-linear-to-r from-amber-700 to-yellow-600 mb-4">
             404
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -49,7 +49,7 @@ export default function NotFound() {
           </button>
           <button
             onClick={() => router.push("/")}
-            className="px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-indigo-50 transition-colors flex items-center justify-center gap-2"
+            className="px-6 py-3 bg-white text-slate-900 rounded-full font-semibold hover:bg-amber-100 transition-colors flex items-center justify-center gap-2"
           >
             <Home className="w-4 h-4" />
             Home
@@ -65,7 +65,7 @@ export default function NotFound() {
           Need help?{" "}
           <motion.a
             href="/"
-            className="text-indigo-400 hover:text-cyan-400 transition-colors"
+            className="text-amber-600 hover:text-yellow-700 transition-colors"
           >
             Contact us
           </motion.a>

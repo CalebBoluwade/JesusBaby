@@ -14,6 +14,7 @@ export async function getPosts() {
       excerpt: posts.excerpt,
       content: posts.content,
       author_name: sql<string>`coalesce(${users.name}, ${posts.author_name})`,
+      author_image: users.image,
       created_at: posts.created_at,
       rating_average: avg(post_ratings.rating),
       rating_count: count(post_ratings.id),
@@ -68,6 +69,7 @@ export async function createPost(input: { title: string; excerpt: string; conten
   revalidatePath("/journal");
   return {
     ...post,
+    author_image: session.user.image ?? null,
     created_at: post.created_at?.toISOString() ?? null,
   };
 }

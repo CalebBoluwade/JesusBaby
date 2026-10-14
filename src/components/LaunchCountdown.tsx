@@ -18,7 +18,7 @@ const TimeUnit = ({ value, label }: { value: number; label: string }) => (
     animate={{ y: 0, opacity: 1 }}
     className="flex flex-col items-center"
   >
-    <div className="bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-lg px-4 py-3 min-w-16">
+    <div className="bg-gradient-to-br from-amber-700 to-yellow-600 rounded-lg px-4 py-3 min-w-16">
       <span className="text-2xl md:text-3xl font-bold text-white">
         {String(value).padStart(2, "0")}
       </span>

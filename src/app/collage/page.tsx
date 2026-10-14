@@ -168,9 +168,9 @@ export default function CollagePage() {
   }
 
   return (
-    <div className="min-h-screen h-[calc(100dvh-64px)] flex flex-col lg:flex-row">
-      <div className="w-full lg:w-1/6 bg-linear-to-br from-slate-900 to-slate-800 px-6 py-8 text-white">
-        <div className="mb-6">Testimony Categories</div>
+    <div className="min-h-screen h-[calc(100dvh-64px)] flex flex-col lg:flex-row" style={{ background: "#0f0f0f" }}>
+      <div className="w-full lg:w-1/6 px-6 py-8 text-white" style={{ background: "#111", borderRight: "1px solid #2b2b2b" }}>
+        <div className="mb-6" style={{ color: "#888", fontSize: "0.75rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.15em" }}>Testimony Categories</div>
 
         <Accordion type="single" collapsible className="w-full">
           {Categories.map((category, idx) => (
@@ -184,9 +184,10 @@ export default function CollagePage() {
                   onClick={() => SetSelectedCategory(category)}
                   className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
                     SelectedCategory === category
-                      ? "bg-indigo-600 text-white"
-                      : "bg-slate-700 text-slate-200 hover:bg-slate-600"
+                      ? "text-[#111]"
+                      : "text-[#888] hover:text-white"
                   }`}
+                  style={SelectedCategory === category ? { background: "#d7fb66" } : { background: "#1f1f1f" }}
                 >
                   Filter by {category}
                 </button>
@@ -198,21 +199,22 @@ export default function CollagePage() {
         {SelectedCategory && (
           <button
             onClick={() => SetSelectedCategory(null)}
-            className="w-full mt-6 px-4 py-2 bg-slate-700 text-slate-200 rounded hover:bg-slate-600 transition-colors text-sm font-medium"
+            className="w-full mt-6 px-4 py-2 rounded text-sm font-medium transition-colors text-[#888] hover:text-white"
+          style={{ background: "#1f1f1f" }}
           >
             Reset (Show All)
           </button>
         )}
       </div>
 
-      <div className="w-full lg:w-5/6 px-6 py-8 border-r overflow-y-scroll border-slate-200">
+      <div className="w-full lg:w-5/6 px-6 py-8 overflow-y-scroll" style={{ borderRight: "1px solid #2b2b2b" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-12"
         >
           <h2 className="text-4xl font-extrabold mb-4">Wall of Victory</h2>
-          <p className="text-lg text-slate-300">
+          <p className="text-lg" style={{ color: "#888" }}>
             Hover over and read real stories of real people who found real
             freedom in Christ. These are not just stories; they are evidence of
             God&#39;s power to change lives.
@@ -237,13 +239,13 @@ export default function CollagePage() {
               >
                 <Popover>
                   <PopoverTrigger asChild>
-                    <Avatar className="w-18 h-18 border-4 border-white shadow-lg transition-colors hover:border-indigo-200">
+                    <Avatar className="w-18 h-18 border-4 border-white shadow-lg transition-colors hover:border-amber-200">
                       <AvatarImage
                         src={user.image}
                         alt={user.name}
                         className="object-cover"
                       />
-                      <AvatarFallback className="bg-linear-to-br from-indigo-400 to-purple-500 text-white font-semibold">
+                      <AvatarFallback className="bg-linear-to-br from-amber-600 to-yellow-600 text-white font-semibold">
                         {user.name
                           .split(" ")
                           .map((n) => n[0])
@@ -259,7 +261,7 @@ export default function CollagePage() {
             ))}
 
             <motion.a
-              className="w-18 h-18 flex items-center justify-center border-4 border-dashed border-white rounded-full cursor-pointer hover:border-indigo-200 transition-colors"
+              className="w-18 h-18 flex items-center justify-center border-4 border-dashed border-white rounded-full cursor-pointer hover:border-amber-200 transition-colors"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.1, transition: { duration: 0.3 } }}
@@ -314,13 +316,13 @@ export default function CollagePage() {
             >
               <Popover>
                 <PopoverTrigger asChild>
-                  <Avatar className="w-18 h-18 border-4 border-white shadow-lg transition-colors hover:border-indigo-200">
+                  <Avatar className="w-18 h-18 border-4 border-white shadow-lg transition-colors hover:border-amber-200">
                     <AvatarImage
                       src={user.image}
                       alt={user.name}
                       className="object-cover"
                     />
-                    <AvatarFallback className="bg-linear-to-br from-indigo-400 to-purple-500 text-white font-semibold">
+                    <AvatarFallback className="bg-linear-to-br from-amber-600 to-yellow-600 text-white font-semibold">
                       {user.name
                         .split(" ")
                         .map((n) => n[0])

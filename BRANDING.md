@@ -9,7 +9,7 @@
 ## Color Palette
 
 ### Primary Colors
-- **Indigo**: `#6366f1` - Primary brand color (faith, trust)
+- **amber**: `#6366f1` - Primary brand color (faith, trust)
 - **Cyan**: `#06b6d4` - Secondary accent (hope, light)
 - **Amber/Gold**: `#fbbf24` - Accent (divine light, glory)
 
@@ -58,7 +58,7 @@
 ## Visual Elements
 
 ### Gradients
-- **Primary Gradient**: Indigo → Cyan (left to right)
+- **Primary Gradient**: amber → Cyan (left to right)
 - **Background Gradient**: Dark Slate → Slate (top to bottom)
 
 ### Spacing

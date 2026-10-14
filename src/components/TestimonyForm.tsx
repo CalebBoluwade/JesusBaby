@@ -118,7 +118,7 @@ export default function TestimonyForm() {
       className="bg-white rounded-lg shadow-xl p-8 --px-4 --sm:px-6 --lg:px-8 mt-10 mb-20 max-w-2xl mx-auto"
     >
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 text-indigo-600 mb-4">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 text-amber-600 mb-4">
           <Heart className="w-6 h-6 fill-current" />
         </div>
         <h2 className="text-3xl font-bold text-slate-900">
@@ -222,7 +222,7 @@ export default function TestimonyForm() {
               <FormItem>
                 <div className="space-y-2">
                   <FormLabel>Upload Video Testimony (Optional)</FormLabel>
-                  <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-indigo-500 transition-colors">
+                  <div className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-amber-500 transition-colors">
                     {!videoFile ? (
                       <div>
                         <Input

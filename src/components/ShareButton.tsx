@@ -19,7 +19,7 @@ export default function ShareButton() {
   };
 
   return (
-    <button onClick={handleShare} className="px-4 py-2 bg-blue-600 text-white rounded">
+    <button onClick={handleShare} className="px-4 py-2 bg-amber-700 text-white rounded">
       Share
     </button>
   );

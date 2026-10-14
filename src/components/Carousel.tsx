@@ -125,7 +125,7 @@ export default function Carousel() {
           <div className="px-5 text-center h-full flex flex-col justify-center">
             <h3 className="text-4xl font-bold --text-primary mb-4">
               Delivered from{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-cyan-400">
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-700 to-yellow-600">
                 {testimonials[currentIndex].title}
               </span>
             </h3>

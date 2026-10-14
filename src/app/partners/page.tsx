@@ -54,7 +54,7 @@ export default function PartnersPage() {
       projectUrl: "modal",
       comingSoon: true,
     },
-        {
+    {
       id: 3,
       brandName: "⛺️ Christian Social Community",
       name: "Community",
@@ -96,9 +96,8 @@ export default function PartnersPage() {
 
   const colorMap: Record<string, string> = {
     "from-red-500 to-pink-500": "text-red-500",
-    "from-indigo-500 to-purple-500": "text-indigo-500",
-    "from-emerald-500 to-teal-500": "text-emerald-500",
     "from-amber-500 to-orange-500": "text-amber-500",
+    "from-emerald-500 to-teal-500": "text-emerald-500",
   };
 
   const partnerOptions = [
@@ -129,7 +128,7 @@ export default function PartnersPage() {
       description:
         "Inquire about partnership opportunities, Join us in spreading the love of Jesus, hope and deliverance",
       icon: Users,
-      color: "from-indigo-500 to-purple-500",
+      color: "from-amber-500 to-orange-500",
     },
     {
       id: "donate",
@@ -156,19 +155,23 @@ export default function PartnersPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-            className="pb-16"
+          className="pb-16"
         >
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-12 max-w-4xl"
           >
-            <div className="mb-5 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-indigo-600">
-              <span className="h-2 w-2 rounded-full bg-amber-400" /> Building together
-              <span className="text-slate-500">JesusBaby network</span>
+            <div className="mb-5 flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-amber-600">
+              <span className="h-2 w-2 rounded-full bg-amber-400" /> Building
+              together
+              <span className="text-slate-500">
+                The Live for Christ network
+              </span>
             </div>
             <h1 className="max-w-3xl text-4xl font-black tracking-tight text-slate-950 sm:text-6xl">
-              Projects that turn faith into <span className="text-indigo-600">movement.</span>
+              Projects that turn faith into{" "}
+              <span className="text-amber-600">movement.</span>
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600">
               Explore some of the innovative projects we&#39;ve worked on and
@@ -176,8 +179,12 @@ export default function PartnersPage() {
               and hope to those in need.
             </p>
             <div className="mt-7 flex flex-wrap gap-3 text-sm font-semibold text-slate-600">
-              <span className="border border-slate-900/10 bg-white/70 px-4 py-2">6 active initiatives</span>
-              <span className="border border-slate-900/10 bg-white/70 px-4 py-2">One shared mission</span>
+              <span className="border border-slate-900/10 bg-white/70 px-4 py-2">
+                6 active initiatives
+              </span>
+              <span className="border border-slate-900/10 bg-white/70 px-4 py-2">
+                One shared mission
+              </span>
             </div>
           </motion.div>
 
@@ -203,7 +210,9 @@ export default function PartnersPage() {
           className="mb-10"
         >
           <div className="mb-4 flex items-center justify-between">
-            <span className="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">Your next step</span>
+            <span className="text-xs font-bold uppercase tracking-[0.22em] text-amber-400">
+              Your next step
+            </span>
             <ArrowUpRight className="h-5 w-5 text-slate-500" />
           </div>
           <h2 className="text-4xl font-black tracking-tight">Get Involved</h2>
@@ -218,9 +227,11 @@ export default function PartnersPage() {
             const Icon = option.icon;
             const isSelected = selectedOption === option.id;
             const isDisabled = option.disabled;
-            let optionClassName = "border-white/20 hover:border-white/40 bg-white/5";
+            let optionClassName =
+              "border-white/20 hover:border-white/40 bg-white/5";
             if (isDisabled) {
-              optionClassName = "border-slate-600 bg-slate-700/30 opacity-50 cursor-not-allowed";
+              optionClassName =
+                "border-slate-600 bg-slate-700/30 opacity-50 cursor-not-allowed";
             } else if (isSelected) {
               optionClassName = "border-white bg-white/10 backdrop-blur-sm";
             }
@@ -299,7 +310,7 @@ export default function PartnersPage() {
                         <button
                           type="button"
                           onClick={() => router.push("/partners/collaborate")}
-                          className="w-full py-3 bg-linear-to-r from-indigo-500 to-purple-500 rounded-lg font-bold hover:shadow-lg transition-all cursor-pointer text-center"
+                          className="w-full py-3 bg-linear-to-r from-amber-500 to-orange-500 rounded-lg font-bold hover:shadow-lg transition-all cursor-pointer text-center"
                         >
                           Collaborate with Us
                         </button>

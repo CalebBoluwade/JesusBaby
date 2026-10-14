@@ -107,8 +107,8 @@ export default function SalvationAltarCallModal({
                     { icon: Flame, title: "Commit" },
                   ].map((step, idx) => (
                     <div key={idx} className="text-center">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-indigo-500/20 border border-indigo-500/50 mb-2">
-                        <step.icon className="w-5 h-5 text-indigo-400" />
+                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-amber-700/20 border border-amber-700/50 mb-2">
+                        <step.icon className="w-5 h-5 text-amber-400" />
                       </div>
                       <p className="text-sm font-semibold text-white">
                         {step.title}
@@ -117,7 +117,7 @@ export default function SalvationAltarCallModal({
                   ))}
                 </div>
 
-                <div className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-lg p-4">
+                <div className="bg-gradient-to-r from-amber-700/10 to-yellow-700/10 border border-amber-700/20 rounded-lg p-4">
                   <p className="text-xs text-slate-400 mb-3 uppercase tracking-wide">
                     Pray this prayer:
                   </p>

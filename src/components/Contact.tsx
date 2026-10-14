@@ -24,7 +24,7 @@ const countries = {
         name: "Mentally Aware Nigeria Initiative",
         phone: "+234 (0) 700 0000 123",
         icon: BookOpenText,
-        color: "bg-blue-500",
+        color: "bg-amber-700",
       },
     ],
   },
@@ -47,7 +47,7 @@ const countries = {
         name: "Crisis Text Line",
         phone: "Text HOME to 741741",
         icon: BookOpenText,
-        color: "bg-blue-500",
+        color: "bg-amber-700",
       },
     ],
   },
@@ -70,7 +70,7 @@ const countries = {
         name: "Shout Crisis Text Line",
         phone: "Text SHOUT to 85258",
         icon: BookOpenText,
-        color: "bg-blue-500",
+        color: "bg-amber-700",
       },
     ],
   },
@@ -93,7 +93,7 @@ const countries = {
         name: "Crisis Text Line Canada",
         phone: "Text HELLO to 741741",
         icon: BookOpenText,
-        color: "bg-blue-500",
+        color: "bg-amber-700",
       },
     ],
   },
@@ -146,7 +146,7 @@ export default function ContactPage() {
                 className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
               >
                 &#34;He Leads Me Besides{" "}
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-cyan-400">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-700 to-yellow-600">
                   The Still Waters
                 </span>&#34;
               </motion.h2>
@@ -237,8 +237,8 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg border-b-4 border-purple-600">
-              <h3 className="text-2xl font-semibold text-purple-700 mb-6">
+            <div className="bg-white p-6 rounded-lg shadow-lg border-b-4 border-amber-700">
+              <h3 className="text-2xl font-semibold text-amber-800 mb-6">
                 Additional Support
               </h3>
               <ul className="space-y-4 text-gray-700">
@@ -271,7 +271,7 @@ export default function ContactPage() {
                   <span className="font-bold block mb-1">Email Support</span>
                   <a
                     href="mailto:info@deliverance.com"
-                    className="text-blue-600 hover:underline text-sm"
+                    className="text-amber-700 hover:underline text-sm"
                   >
                     info@deliverance.com
                   </a>

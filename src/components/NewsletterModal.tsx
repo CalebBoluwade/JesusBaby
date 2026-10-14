@@ -91,7 +91,7 @@ export default function NewsletterModal({
               onChange={(e) => setEmail(e.target.value)}
               required
               disabled={loading || submitted}
-              className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
+              className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-600 disabled:opacity-50"
             />
           </div>
 
@@ -99,7 +99,7 @@ export default function NewsletterModal({
             <button
               type="submit"
               disabled={loading || submitted}
-              className="w-full px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+              className="w-full px-4 py-2 bg-amber-700 text-white rounded-lg font-semibold hover:bg-amber-800 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
             >
               {submitted ? (
                 <>
