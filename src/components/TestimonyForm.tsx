@@ -94,16 +94,16 @@ export default function TestimonyForm() {
 
   if (form.formState.isSubmitSuccessful) {
     return (
-      <div className="flex flex-col items-center justify-center py-20 min-h-screen h-[calc(100dvh-64px)] text-center">
+      <div className="flex flex-col items-center justify-center py-20 min-h-screen h-[calc(100dvh-64px)] text-center bg-app-bg">
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6"
+          className="w-20 h-20 bg-app-lime-dim rounded-full flex items-center justify-center mb-6"
         >
-          <Sparkles className="w-10 h-10 text-green-600" />
+          <Sparkles className="w-10 h-10 text-app-lime" />
         </motion.div>
-        <h3 className="text-2xl font-bold text-slate-900 mb-2">Hallelujah!</h3>
-        <p className="text-slate-600">
+        <h3 className="text-2xl font-bold text-app-text mb-2">Hallelujah!</h3>
+        <p className="text-app-muted">
           Your testimony has been shared and will encourage others.
         </p>
       </div>
@@ -115,16 +115,16 @@ export default function TestimonyForm() {
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 1.05 }}
-      className="bg-white rounded-lg shadow-xl p-8 --px-4 --sm:px-6 --lg:px-8 mt-10 mb-20 max-w-2xl mx-auto"
+      className="bg-app-card border border-app-line rounded-lg shadow-xl p-8 --px-4 --sm:px-6 --lg:px-8 mt-10 mb-20 max-w-2xl mx-auto"
     >
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-100 text-amber-600 mb-4">
+        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-app-lime-dim text-app-lime mb-4">
           <Heart className="w-6 h-6 fill-current" />
         </div>
-        <h2 className="text-3xl font-bold text-slate-900">
+        <h2 className="text-3xl font-bold text-app-text">
           Share Your Victory
         </h2>
-        <p className="text-slate-500 mt-2 font-medium">
+        <p className="text-app-muted mt-2 font-medium">
           &#34;They triumphed over him by the blood of the Lamb and by the word
           of their testimony.&#34; - Revelation 12:11
           <br />
@@ -144,9 +144,9 @@ export default function TestimonyForm() {
               <FormItem className="flex items-center justify-between rounded-lg border border-slate-200 p-4">
                 <div className="flex items-center gap-3">
                   {field.value ? (
-                    <EyeOff className="w-5 h-5 text-slate-500" />
+                    <EyeOff className="w-5 h-5 text-app-muted" />
                   ) : (
-                    <Eye className="w-5 h-5 text-slate-500" />
+                    <Eye className="w-5 h-5 text-app-muted" />
                   )}
                   <FormLabel className="mb-0 cursor-pointer">
                     Submit Anonymously
@@ -237,11 +237,11 @@ export default function TestimonyForm() {
                           onClick={() => videoInputRef.current?.click()}
                           className="flex flex-col items-center gap-2 mx-auto"
                         >
-                          <Upload className="w-8 h-8 text-slate-400" />
-                          <span className="text-sm text-slate-600">
+                          <Upload className="w-8 h-8 text-app-muted2" />
+                          <span className="text-sm text-app-muted">
                             Click to upload or drag and drop
                           </span>
-                          <span className="text-xs text-slate-500">
+                          <span className="text-xs text-app-muted2">
                             MP4, WebM, or other video formats
                           </span>
                         </button>

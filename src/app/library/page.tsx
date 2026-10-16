@@ -47,23 +47,23 @@ export const metadata: Metadata = {
 
 export default function LibraryPage() {
   return (
-    <main className="min-h-[calc(100dvh-64px)] px-5 py-12 sm:px-8 sm:py-16" style={{ background: "#0f0f0f" }}>
+    <main className="min-h-[calc(100dvh-64px)] bg-app-bg px-5 py-12 sm:px-8 sm:py-16">
       <div className="mx-auto max-w-6xl">
         <header className="max-w-3xl">
-          <div className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em]" style={{ color: "#d7fb66" }}>
+          <div className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-app-lime">
             <BookOpenText className="h-4 w-4" />
             JesusBaby Library
           </div>
-          <h1 className="text-4xl font-black leading-tight text-white sm:text-6xl">
+          <h1 className="text-4xl font-black leading-tight text-app-text sm:text-6xl">
             Books for the journey.
           </h1>
-          <p className="mt-5 max-w-2xl text-lg leading-8" style={{ color: "#888" }}>
+          <p className="mt-5 max-w-2xl text-lg leading-8 text-app-muted">
             Explore faith-centered reading for seasons of growth, hope, and
             transformation. Ask us about digital downloads or printed editions.
           </p>
         </header>
 
-        <section aria-labelledby="formats-heading" className="mt-12 border-y" style={{ borderColor: "#2b2b2b" }}>
+        <section aria-labelledby="formats-heading" className="mt-12 border-y border-app-line">
           <h2 id="formats-heading" className="sr-only">Browse book formats</h2>
           {libraryOptions.map((option, index) => {
             const Icon = option.icon;
@@ -71,23 +71,21 @@ export default function LibraryPage() {
               <article
                 key={option.title}
                 className={`grid gap-6 py-8 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-10 ${
-                  index > 0 ? "border-t" : ""
+                  index > 0 ? "border-t border-app-line" : ""
                 }`}
-                style={index > 0 ? { borderColor: "#2b2b2b" } : {}}
               >
                 <div className="flex items-start gap-4">
-                  <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center" style={{ background: "#1a2a12", color: "#d7fb66" }}>
+                  <span className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center bg-app-lime-dim text-app-lime">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">{option.title}</h3>
-                    <p className="mt-2 max-w-xl leading-7" style={{ color: "#888" }}>{option.description}</p>
+                    <h3 className="text-2xl font-bold text-app-text">{option.title}</h3>
+                    <p className="mt-2 max-w-xl leading-7 text-app-muted">{option.description}</p>
                   </div>
                 </div>
                 <Link
                   href={`mailto:partners@jesusbaby.com?subject=${encodeURIComponent(option.subject)}`}
-                  className="inline-flex min-h-11 items-center justify-center gap-2 px-5 py-3 text-sm font-bold transition-colors sm:justify-self-end"
-                  style={{ background: "#d7fb66", color: "#111" }}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 bg-app-lime px-5 py-3 text-sm font-bold text-app-bg transition-opacity hover:opacity-90 sm:justify-self-end"
                 >
                   <Mail className="h-4 w-4" aria-hidden="true" />
                   {option.action}
@@ -98,7 +96,7 @@ export default function LibraryPage() {
           })}
         </section>
 
-        <p className="mt-6 max-w-3xl text-sm leading-6" style={{ color: "#555" }}>
+        <p className="mt-6 max-w-3xl text-sm leading-6 text-app-muted">
           Our book listings are being prepared. Contact us for current
           availability; any purchase, download, and delivery details will be
           confirmed before you proceed.

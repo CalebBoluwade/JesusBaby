@@ -56,98 +56,121 @@ const HeroCarousel = ({
     return () => clearInterval(timer);
   }, []);
 
-  const nextSlide = () =>
+  const [direction, setDirection] = useState(0);
+
+  const nextSlide = () => {
+    setDirection(1);
     setCurrent((prev) => (prev + 1) % FEATURED_STORIES.length);
-  const prevSlide = () =>
-    setCurrent(
-      (prev) => (prev - 1 + FEATURED_STORIES.length) % FEATURED_STORIES.length
-    );
+  };
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrent((prev) => (prev - 1 + FEATURED_STORIES.length) % FEATURED_STORIES.length);
+  };
+
+  const slideVariants = {
+    enter: (d: number) => ({ opacity: 0, x: d * 60, scale: 1.04 }),
+    center: { opacity: 1, x: 0, scale: 1 },
+    exit: (d: number) => ({ opacity: 0, x: d * -60, scale: 0.97 }),
+  };
 
   return (
     <div className="relative h-[calc(100dvh-64px)] w-full overflow-hidden scroll-snap-start">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={current}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7 }}
-          className={`absolute inset-0 flex items-center justify-center`}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.65, ease: [0.32, 0, 0.18, 1] }}
+          className="absolute inset-0 flex items-center justify-center"
         >
           {/* Video Player */}
           <div className="absolute inset-0 z-0">
-            <VideoPlayer
-              src={FEATURED_STORIES[current].videoUrl}
-              autoPlay
-              muted
-              loop
-              showControls={false}
-            />
+            <VideoPlayer src={FEATURED_STORIES[current].videoUrl} autoPlay muted loop showControls={false} />
           </div>
 
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/20 z-5" />
+          <div className="absolute inset-0 bg-black/50 z-5" />
 
           <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
             <motion.div
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 24, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+              transition={{ delay: 0.15, type: "spring", stiffness: 300, damping: 28 }}
+              className="inline-flex items-center gap-2 px-3 py-1 border border-white/20 bg-white/10 backdrop-blur-sm mb-6"
             >
-              <Sparkles className="w-4 h-4 text-yellow-300" />
-              <span className="text-sm font-medium tracking-wide uppercase">
+              <motion.span
+                animate={{ rotate: [0, 15, -10, 15, 0] }}
+                transition={{ delay: 0.6, duration: 0.6, ease: "easeInOut" }}
+              >
+                <Sparkles className="w-3.5 h-3.5" style={{ color: "#d7fb66" }} />
+              </motion.span>
+              <span className="text-xs font-bold tracking-[0.2em] uppercase text-white">
                 Delivered By His Grace
               </span>
             </motion.div>
 
             <motion.h2
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 32, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+              transition={{ delay: 0.25, type: "spring", stiffness: 260, damping: 24 }}
+              className="text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight text-white"
             >
-              &#34;Freedom from{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-700 to-yellow-600">
+              Freedom from{" "}
+              <motion.span
+                key={FEATURED_STORIES[current].addiction}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35, type: "spring", stiffness: 300, damping: 22 }}
+                style={{ color: "#d7fb66", display: "inline-block" }}
+              >
                 {FEATURED_STORIES[current].addiction}
-              </span>{" "}
-              Found in Jesus&#34;
+              </motion.span>
             </motion.h2>
 
             <motion.p
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 24, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="text-lg md:text-2xl text-slate-200 font-light italic mb-8 max-w-2xl mx-auto"
+              transition={{ delay: 0.35, type: "spring", stiffness: 260, damping: 26 }}
+              className="text-lg md:text-xl text-white/80 font-light italic mb-8 max-w-2xl mx-auto leading-relaxed"
             >
-              &#34;{FEATURED_STORIES[current].story}&#34;
+              &ldquo;{FEATURED_STORIES[current].story}&rdquo;
             </motion.p>
 
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-20"
+              transition={{ delay: 0.45, type: "spring", stiffness: 260, damping: 26 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3 relative z-20"
             >
-              <button
+              <motion.button
                 onClick={() => router.push("/collage")}
-                className="px-8 py-3 bg-white text-slate-900 rounded-full font-bold hover:bg-amber-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent transition-colors flex items-center gap-2"
+                className="px-8 py-3 font-bold text-sm text-black flex items-center gap-2"
+                style={{ background: "#d7fb66" }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
                 Read More Victories <ArrowRight className="w-4 h-4" />
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={onNewsletterClick}
-                className="px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full font-bold hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white transition-colors"
+                className="px-8 py-3 border border-white/30 bg-white/10 backdrop-blur-sm text-white font-bold text-sm hover:bg-white/20 transition-colors"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
-                Find Hope & Help
-              </button>
+                Find Hope &amp; Help
+              </motion.button>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="mt-8 text-slate-400 text-sm font-medium tracking-widest uppercase"
+              transition={{ delay: 0.55 }}
+              className="mt-8 text-white/40 text-xs font-bold tracking-[0.2em] uppercase"
             >
               — {FEATURED_STORIES[current].name}
             </motion.div>
@@ -156,34 +179,43 @@ const HeroCarousel = ({
       </AnimatePresence>
 
       {/* Controls */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-4 z-30">
-        <button
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7 }}
+        className="absolute bottom-8 left-0 right-0 flex justify-center gap-4 z-30"
+      >
+        <motion.button
           onClick={prevSlide}
           aria-label="Previous testimonial"
-          className="p-2 rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white backdrop-blur-sm transition-all"
+          className="p-2 border border-white/20 bg-white/10 backdrop-blur-sm"
+          whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
+          whileTap={{ scale: 0.92 }}
         >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+          <ChevronLeft className="w-5 h-5 text-white" />
+        </motion.button>
         <div className="flex gap-2 items-center">
           {FEATURED_STORIES.map((_, idx) => (
-            <button
+            <motion.button
               key={idx + 1}
-              onClick={() => setCurrent(idx)}
+              onClick={() => { setDirection(idx > current ? 1 : -1); setCurrent(idx); }}
               aria-label={`Go to testimonial ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white ${
-                current === idx ? "w-8 bg-white" : "w-2 bg-white/30"
-              }`}
+              animate={{ width: current === idx ? 28 : 8, opacity: current === idx ? 1 : 0.4 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className={`h-1.5 ${current === idx ? "bg-white" : "bg-white/50"}`}
             />
           ))}
         </div>
-        <button
+        <motion.button
           onClick={nextSlide}
           aria-label="Next testimonial"
-          className="p-2 rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white backdrop-blur-sm transition-all"
+          className="p-2 border border-white/20 bg-white/10 backdrop-blur-sm"
+          whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)" }}
+          whileTap={{ scale: 0.92 }}
         >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div>
+          <ChevronRight className="w-5 h-5 text-white" />
+        </motion.button>
+      </motion.div>
     </div>
   );
 };
@@ -193,7 +225,7 @@ export default function Home() {
   const [countdownOpen, setCountdownOpen] = useState(true);
 
   return (
-    <div className="min-h-screen font-sans scroll-smooth snap-mandatory" style={{ background: "#101010", color: "#f5f5f2" }}>
+    <div className="min-h-screen bg-app-bg text-app-text font-sans scroll-smooth snap-mandatory">
       <LaunchCountdown open={countdownOpen} onOpenChange={setCountdownOpen} />
       <HeroCarousel onNewsletterClick={() => setNewsletterOpen(true)} />
       <Carousel />

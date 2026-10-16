@@ -5,15 +5,38 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-function ProjectLink({ project }: { project: Project & { comingSoon?: boolean } }) {
-  const className = "mt-4 inline-block bg-white px-3 py-2 text-sm font-medium text-black transition-colors hover:bg-gray-200";
-  const arrow = <ArrowRight className="mr-2 inline-block h-4 w-4 text-black transition-all group-hover:ms-0.5 rtl:rotate-180" />;
+function ProjectLink({
+  project,
+}: {
+  project: Project & { comingSoon?: boolean };
+}) {
+  const className =
+    "mt-4 inline-block bg-app-lime px-3 py-2 text-sm font-medium text-app-bg transition-colors hover:opacity-90";
+  const arrow = (
+    <ArrowRight className="mr-2 inline-block h-4 w-4 text-app-bg transition-all group-hover:ms-0.5 rtl:rotate-180" />
+  );
 
   if (project.projectUrl.startsWith("/")) {
-    return <Link className={className} href={project.projectUrl}><span>View Project</span>{arrow}</Link>;
+    return (
+      <Link className={className} href={project.projectUrl}>
+        <span>View Project</span>
+        {arrow}
+      </Link>
+    );
   }
 
-  return <motion.a className={className} href={project.projectUrl} target="_blank" rel="noopener noreferrer" aria-disabled={project.comingSoon}><span>View Project</span>{arrow}</motion.a>;
+  return (
+    <motion.a
+      className={className}
+      href={project.projectUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-disabled={project.comingSoon}
+    >
+      <span>View Project</span>
+      {arrow}
+    </motion.a>
+  );
 }
 
 const ProjectCard = ({
@@ -22,7 +45,11 @@ const ProjectCard = ({
   project: Project & { comingSoon?: boolean };
 }) => {
   return (
-    <motion.div whileHover={{ y: -5 }} transition={{ duration: 0.2 }} className="group relative block min-h-67.5 overflow-hidden rounded-2xl bg-black shadow-lg shadow-slate-900/10 transition-all hover:shadow-xl hover:shadow-amber-950/20 dark:shadow-gray-700/25">
+    <motion.div
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2 }}
+      className="group relative block min-h-67.5 overflow-hidden rounded-2xl bg-black shadow-lg shadow-slate-900/10 transition-all hover:shadow-xl hover:shadow-amber-950/20 dark:shadow-gray-700/25"
+    >
       <motion.img
         alt={project.name}
         src={project.imageUrl}

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Mail, CheckCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Check } from "lucide-react";
 
 export default function NewsletterSignup() {
   const [email, setEmail] = useState("");
@@ -12,15 +12,12 @@ export default function NewsletterSignup() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
     try {
-      // Replace with your actual API endpoint
       const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-
       if (response.ok) {
         setSubmitted(true);
         setEmail("");
@@ -35,54 +32,106 @@ export default function NewsletterSignup() {
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ type: "spring", stiffness: 260, damping: 28 }}
       viewport={{ once: true }}
-      className="py-16 px-6 bg-gradient-to-r from-amber-800 to-yellow-700 text-white"
+      className="border-t border-app-line bg-app-panel px-5 py-16 sm:px-8 lg:px-12"
     >
-      <div className="max-w-2xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Stay Updated on Stories of Deliverance
-        </h2>
-        <p className="text-lg text-white/90 mb-8">
-          Get inspired by testimonies of transformation and receive resources for your journey.
-        </p>
-
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
-          <div className="flex-1 relative">
-            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" />
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={loading || submitted}
-              className="w-full pl-12 pr-4 py-3 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white placeholder:text-white/60 focus:outline-none focus:border-white/60 transition-colors disabled:opacity-50"
-            />
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.05, type: "spring", stiffness: 300, damping: 26 }}
+              viewport={{ once: true }}
+              className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-app-lime"
+            >
+              Stay connected
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.12, type: "spring", stiffness: 280, damping: 24 }}
+              viewport={{ once: true }}
+              className="max-w-md text-3xl font-black leading-tight tracking-tight text-app-text sm:text-4xl"
+            >
+              Stories of deliverance, straight to you.
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, type: "spring", stiffness: 280, damping: 26 }}
+              viewport={{ once: true }}
+              className="mt-3 max-w-sm text-sm leading-6 text-app-muted"
+            >
+              Get inspired by testimonies of transformation and receive resources for your journey.
+            </motion.p>
           </div>
-          <button
-            type="submit"
-            disabled={loading || submitted}
-            className="px-8 py-3 bg-white text-amber-800 rounded-full font-bold hover:bg-white/90 transition-colors disabled:opacity-50 flex items-center justify-center gap-2 whitespace-nowrap"
-          >
-            {submitted ? (
-              <>
-                <CheckCircle className="w-5 h-5" />
-                Subscribed!
-              </>
-            ) : loading ? (
-              "Subscribing..."
-            ) : (
-              "Subscribe"
-            )}
-          </button>
-        </form>
 
-        <p className="text-sm text-white/70 mt-4">
+          <motion.form
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.22, type: "spring", stiffness: 260, damping: 26 }}
+            viewport={{ once: true }}
+            onSubmit={handleSubmit}
+            className="flex w-full max-w-md gap-0"
+          >
+            <div className="relative flex-1">
+              <Mail className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-app-muted" />
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={loading || submitted}
+                className="h-11 w-full border border-r-0 border-app-line bg-app-card pl-10 pr-4 text-sm text-app-text outline-none transition placeholder:text-app-muted3 focus:border-app-lime disabled:opacity-50"
+              />
+            </div>
+            <motion.button
+              type="submit"
+              disabled={loading || submitted}
+              className="h-11 shrink-0 bg-app-lime px-6 text-sm font-bold text-app-bg disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
+              whileHover={{ opacity: 0.88 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              <AnimatePresence mode="wait">
+                {submitted ? (
+                  <motion.span
+                    key="done"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="flex items-center gap-2"
+                  >
+                    <Check className="h-4 w-4" /> Subscribed
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="idle"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    {loading ? "..." : "Subscribe"}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.button>
+          </motion.form>
+        </div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-6 text-xs text-app-muted3"
+        >
           We respect your privacy. Unsubscribe at any time.
-        </p>
+        </motion.p>
       </div>
     </motion.section>
   );

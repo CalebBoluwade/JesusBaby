@@ -28,197 +28,179 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+const steps = [
+  { icon: Cross,  title: "Acknowledge", desc: "Recognize Jesus as your Lord and Savior" },
+  { icon: Heart,  title: "Believe",     desc: "Trust in His sacrifice for your sins" },
+  { icon: Flame,  title: "Commit",      desc: "Surrender your life to His purpose" },
+];
+
 export default function SalvationAltarCall() {
   const [submitted, setSubmitted] = React.useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      commitment: false,
-    },
+    defaultValues: { name: "", email: "", commitment: false },
   });
 
-  const onSubmit = async (values: FormValues) => {
+  const onSubmit = async (_values: FormValues) => {
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 5000);
   };
 
   return (
-    <section className="relative py-20 px-6 bg-linear-to-b from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-red-500 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-orange-500 rounded-full blur-3xl" />
-      </div>
+    <section className="bg-app-panel border-y border-app-line px-5 py-16 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-4xl">
 
-      <div className="relative z-10 max-w-4xl mx-auto">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-12"
         >
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/20 border border-red-500/50 mb-6">
-            <Flame className="w-8 h-8 text-red-400" />
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Ready to Surrender Your Life to Jesus?
-          </h2>
-
-          <p className="text-lg text-slate-300 mb-8">
-            This is your moment. Jesus is calling you to come as you are. No
-            judgment, no shame—only grace, redemption, and eternal life.
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-app-lime">
+            Altar Call
           </p>
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <h2 className="max-w-xl text-4xl font-black leading-tight tracking-tight text-app-text sm:text-5xl">
+              Ready to surrender your life to Jesus?
+            </h2>
+            <p className="max-w-xs text-sm leading-7 text-app-muted">
+              No judgment, no shame — only grace, redemption, and eternal life.
+            </p>
+          </div>
         </motion.div>
 
+        {/* Steps */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
-          className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 md:p-12 mb-8"
+          className="mb-10 grid gap-px border border-app-line sm:grid-cols-3"
         >
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {[
-              {
-                icon: Cross,
-                title: "Acknowledge",
-                desc: "Recognize Jesus as your Lord and Savior",
-              },
-              {
-                icon: Heart,
-                title: "Believe",
-                desc: "Trust in His sacrifice for your sins",
-              },
-              {
-                icon: Flame,
-                title: "Commit",
-                desc: "Surrender your life to His purpose",
-              },
-            ].map((step, idx) => (
+          {steps.map((step, idx) => {
+            const Icon = step.icon;
+            return (
               <motion.div
-                key={idx + 1}
-                initial={{ opacity: 0, y: 10 }}
+                key={step.title}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                transition={{ delay: 0.1 + idx * 0.1, type: "spring", stiffness: 280, damping: 24 }}
                 viewport={{ once: true }}
-                className="text-center"
+                className="flex flex-col gap-3 bg-app-card p-6"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-700/20 border border-amber-700/50 mb-4">
-                  <step.icon className="w-6 h-6 text-amber-400" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-slate-400">{step.desc}</p>
+                <motion.span
+                  className="grid h-9 w-9 place-items-center bg-app-lime-dim text-app-lime"
+                  whileHover={{ scale: 1.12 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                >
+                  <Icon className="h-4 w-4" />
+                </motion.span>
+                <p className="text-sm font-black text-app-text">{step.title}</p>
+                <p className="text-xs leading-5 text-app-muted">{step.desc}</p>
               </motion.div>
-            ))}
-          </div>
+            );
+          })}
+        </motion.div>
 
-          <div className="bg-linear-to-r from-amber-700/10 to-yellow-700/10 border border-amber-700/20 rounded-xl p-8 mb-8">
-            <p className="text-slate-300 text-center leading-relaxed mb-6">
-              If You&apos;re Ready To Give Your Life to Jesus, Pray This Prayer
-              with a Sincere Heart:
-            </p>
+        {/* Prayer */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          viewport={{ once: true }}
+          className="mb-10 border border-app-line bg-app-card p-8"
+        >
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-app-muted">
+            Pray this with a sincere heart
+          </p>
+          <blockquote className="border-l-2 border-app-lime pl-5 text-sm leading-8 italic text-app-muted">
+            &ldquo;Lord Jesus, I believe You are the Son of God. I confess my
+            sins and ask for Your forgiveness. I turn from my old ways and
+            invite You into my heart and life. I want to trust and follow You
+            as my Lord and Savior. In Your name, I pray. Amen.&rdquo;
+          </blockquote>
+        </motion.div>
 
-            <div className="bg-slate-900/50 rounded-lg p-6 text-slate-200 italic text-center leading-relaxed">
-              <p className="mb-4">
-                &quot;Lord Jesus, I believe You are the Son of God. I Confess my
-                sins and ask for Your forgiveness. I turn from my old ways and
-                invite You into my heart and life. I want to trust and follow
-                You as my Lord and Savior. In Your name, I pray. Amen.&quot;
-              </p>
-            </div>
-          </div>
-
+        {/* Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="border border-app-line bg-app-card p-8"
+        >
           {submitted ? (
             <motion.div
+              key="success"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-8"
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
+              className="py-8 text-center"
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/20 border border-green-500/50 mb-4">
-                <span className="text-3xl">✓</span>
-              </div>
-              <h4 className="text-xl font-bold text-white mb-2">
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.1, type: "spring", stiffness: 400, damping: 18 }}
+                className="mb-4 block text-4xl"
+              >
+                ✓
+              </motion.span>
+              <h4 className="text-xl font-black text-app-text mb-2">
                 Welcome to God&apos;s Family!
               </h4>
-              <p className="text-slate-300 text-sm">
-                Check your email for next steps and resources
+              <p className="text-sm text-app-muted">
+                Check your email for next steps and resources.
               </p>
             </motion.div>
           ) : (
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4"
-              >
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                 <FormField
                   control={form.control}
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-300">
-                        Your Name
-                      </FormLabel>
+                      <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-app-muted">Your Name</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="Enter your name"
-                          {...field}
-                          className="bg-slate-800/50 border-slate-700 text-white placeholder-slate-500"
-                        />
+                        <Input placeholder="Enter your name" {...field} className="border-app-line bg-app-panel text-app-text placeholder:text-app-muted3 focus:border-app-lime" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-300">Email</FormLabel>
+                      <FormLabel className="text-xs font-bold uppercase tracking-[0.2em] text-app-muted">Email</FormLabel>
                       <FormControl>
-                        <Input
-                          type="email"
-                          placeholder="your@email.com"
-                          {...field}
-                          className="bg-slate-800/50 border-slate-700 text-white placeholder-slate-500"
-                        />
+                        <Input type="email" placeholder="your@email.com" {...field} className="border-app-line bg-app-panel text-app-text placeholder:text-app-muted3 focus:border-app-lime" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
-
                 <FormField
                   control={form.control}
                   name="commitment"
                   render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                    <FormItem className="flex items-start gap-3 space-y-0">
                       <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
+                        <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                       </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel className="text-slate-400 cursor-pointer">
-                          I have prayed this prayer and committed my life to
-                          Jesus Christ
-                        </FormLabel>
-                        <FormMessage />
-                      </div>
+                      <FormLabel className="text-sm leading-5 text-app-muted cursor-pointer">
+                        I have prayed this prayer and committed my life to Jesus Christ
+                      </FormLabel>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
-
                 <Button
                   type="submit"
-                  className="w-full bg-linear-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white font-bold"
+                  className="w-full bg-app-lime text-app-bg font-bold hover:opacity-90 transition-opacity"
                 >
                   I Accept Jesus Today
                 </Button>
@@ -227,34 +209,33 @@ export default function SalvationAltarCall() {
           )}
         </motion.div>
 
+        {/* What's next */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
           viewport={{ once: true }}
-          className="bg-amber-700/10 border border-amber-700/30 rounded-xl p-8"
+          className="mt-6 border border-app-line bg-app-card p-8"
         >
-          <h3 className="text-xl font-bold text-white mb-4">
-            What Happens Next?
-          </h3>
-          <ul className="space-y-3 text-slate-300">
-            <li className="flex gap-3">
-              <span className="text-amber-400 font-bold">→</span>
-              <span>
-                You&apos;ll Receive a Welcome Email with Resources For Your New
-                Faith Journey
-              </span>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-amber-400 font-bold">→</span>
-              <span>Connect with a local church community near you</span>
-            </li>
-            <li className="flex gap-3">
-              <span className="text-amber-400 font-bold">→</span>
-              <span>
-                Get guidance on baptism, discipleship, and spiritual growth
-              </span>
-            </li>
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-app-muted3">What happens next</p>
+          <ul className="space-y-3">
+            {[
+              "You'll receive a welcome email with resources for your new faith journey",
+              "Connect with a local church community near you",
+              "Get guidance on baptism, discipleship, and spiritual growth",
+            ].map((item, idx) => (
+              <motion.li
+                key={item}
+                initial={{ opacity: 0, x: -12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.08, type: "spring", stiffness: 300, damping: 26 }}
+                viewport={{ once: true }}
+                className="flex gap-3 text-sm text-app-muted"
+              >
+                <span className="font-bold text-app-lime shrink-0">→</span>
+                {item}
+              </motion.li>
+            ))}
           </ul>
         </motion.div>
       </div>

@@ -14,7 +14,7 @@ interface ClientLayoutProps {
 
 export const ClientLayout = ({ children, session }: ClientLayoutProps) => {
   return (
-    <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
       <SessionProvider session={session}>
         <Navigation />
         {children}

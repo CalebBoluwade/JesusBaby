@@ -89,116 +89,120 @@ export default function Carousel() {
     },
   ];
 
+  const [direction, setDirection] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
-      );
+      setDirection(1);
+      setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
     }, 5000);
-
     return () => clearInterval(timer);
-  }, []);
+  }, [testimonials.length]);
 
   const nextSlide = () => {
-    setCurrentIndex(
-      currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1
-    );
+    setDirection(1);
+    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
+  const prevSlide = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
   };
 
-  const prevSlide = () => {
-    setCurrentIndex(
-      currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1
-    );
+  const slideVariants = {
+    enter: (d: number) => ({ opacity: 0, x: d * 80 }),
+    center: { opacity: 1, x: 0 },
+    exit: (d: number) => ({ opacity: 0, x: d * -80 }),
   };
 
   return (
-    <div className="relative w-full h-[calc(100dvh-64px)] overflow-hidden bg-slate-900 text-white">
-      <AnimatePresence mode="wait">
+    <div className="relative w-full h-[calc(100dvh-64px)] overflow-hidden bg-app-bg">
+      <AnimatePresence mode="wait" custom={direction}>
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, x: 300 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -300 }}
-          transition={{ duration: 0.5 }}
-          className="absolute inset-0 --bg-white p-8 shadow-lg"
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{ duration: 0.45, ease: [0.32, 0, 0.18, 1] }}
+          className="absolute inset-0 flex flex-col justify-center px-5 sm:px-8 lg:px-12"
         >
-          <div className="px-5 text-center h-full flex flex-col justify-center">
-            <h3 className="text-4xl font-bold --text-primary mb-4">
+          <div className="mx-auto w-full max-w-3xl">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, type: "spring", stiffness: 300, damping: 26 }}
+              className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-app-lime"
+            >
+              {testimonials[currentIndex].book} {testimonials[currentIndex].verse}
+            </motion.p>
+            <motion.h3
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, type: "spring", stiffness: 280, damping: 24 }}
+              className="mb-6 text-4xl font-black leading-tight tracking-tight text-app-text sm:text-5xl"
+            >
               Delivered from{" "}
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-700 to-yellow-600">
+              <motion.span
+                key={testimonials[currentIndex].title}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.28, type: "spring", stiffness: 300, damping: 22 }}
+                className="inline-block text-app-lime"
+              >
                 {testimonials[currentIndex].title}
-              </span>
-            </h3>
-            <p className="text-xl --text-gray-700 mb-6 italic">
-              &#34;{testimonials[currentIndex].verseText}&#34;
-            </p>
-            <div className="mt-4">
-              <p className="text-sm --text-gray-600 font-semibold">
-                - {testimonials[currentIndex].book}{" "}
-                {testimonials[currentIndex].verse}
-              </p>
-            </div>
+              </motion.span>
+            </motion.h3>
+            <motion.blockquote
+              initial={{ opacity: 0, x: -16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.26, type: "spring", stiffness: 260, damping: 26 }}
+              className="border-l-2 border-app-lime pl-6 text-xl leading-9 text-app-muted sm:text-2xl"
+            >
+              &ldquo;{testimonials[currentIndex].verseText}&rdquo;
+            </motion.blockquote>
           </div>
         </motion.div>
       </AnimatePresence>
 
       {/* Controls */}
-      <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-4 z-30">
-        <button
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="absolute bottom-8 left-0 right-0 flex justify-center gap-4 z-30"
+      >
+        <motion.button
           onClick={prevSlide}
-          aria-label="Previous testimonial"
-          className="p-2 rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white backdrop-blur-sm transition-all"
+          aria-label="Previous verse"
+          className="p-2 border border-app-line bg-app-card"
+          whileHover={{ scale: 1.1, borderColor: "var(--app-lime)" }}
+          whileTap={{ scale: 0.92 }}
         >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+          <ChevronLeft className="w-5 h-5 text-app-muted" />
+        </motion.button>
         <div className="flex gap-2 items-center">
           {testimonials.map((_, idx) => (
-            <button
+            <motion.button
               key={idx}
-              onClick={() => setCurrentIndex(idx)}
-              aria-label={`Go to testimonial ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white ${
-                currentIndex === idx ? "w-8 bg-white" : "w-2 bg-white/30"
-              }`}
+              onClick={() => { setDirection(idx > currentIndex ? 1 : -1); setCurrentIndex(idx); }}
+              aria-label={`Go to verse ${idx + 1}`}
+              animate={{ width: currentIndex === idx ? 28 : 6, opacity: currentIndex === idx ? 1 : 0.35 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
+              className={`h-1.5 ${currentIndex === idx ? "bg-app-lime" : "bg-app-line"}`}
             />
           ))}
         </div>
-        <button
+        <motion.button
           onClick={nextSlide}
-          aria-label="Next testimonial"
-          className="p-2 rounded-full bg-white/10 hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white backdrop-blur-sm transition-all"
+          aria-label="Next verse"
+          className="p-2 border border-app-line bg-app-card"
+          whileHover={{ scale: 1.1, borderColor: "var(--app-lime)" }}
+          whileTap={{ scale: 0.92 }}
         >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-      </div>
-
-      {/* <button
-        title="Previous testimonial"
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        title="Next testimonial"
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 p-2 rounded-full shadow-lg hover:bg-white"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
-
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {testimonials.map((_, index) => (
-          <button
-            title={`Go to testimonial ${index + 1}`}
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? "bg-primary" : "bg-gray-300"
-            }`}
-          />
-        ))}
-      </div> */}
+          <ChevronRight className="w-5 h-5 text-app-muted" />
+        </motion.button>
+      </motion.div>
     </div>
   );
 }

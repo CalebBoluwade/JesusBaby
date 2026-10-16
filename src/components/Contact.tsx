@@ -1,286 +1,222 @@
 "use client";
 
 import { useState } from "react";
-import { BookOpenText, PhoneCall, MessageSquare, Sparkles } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { PhoneCall, MessageSquare, BookMarked, Heart, Users, BookOpenText, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 const countries = {
   NG: {
-    name: "Nigeria",
+    name: "Nigeria 🇳🇬",
     hotlines: [
-      {
-        name: "Befrienders Nigeria",
-        phone: "+234 (0) 2241 7368",
-        icon: PhoneCall,
-        color: "bg-red-500",
-      },
-      {
-        name: "Lagos State Suicide Prevention Initiative",
-        phone: "+234 (0) 701 0000 911",
-        icon: MessageSquare,
-        color: "bg-teal-500",
-      },
-      {
-        name: "Mentally Aware Nigeria Initiative",
-        phone: "+234 (0) 700 0000 123",
-        icon: BookOpenText,
-        color: "bg-amber-700",
-      },
+      { name: "Befrienders Nigeria", phone: "+234 (0) 2241 7368", href: "tel:+23422417368", text: false },
+      { name: "Lagos Suicide Prevention", phone: "+234 (0) 701 000 0911", href: "tel:+2347010000911", text: false },
+      { name: "Mentally Aware Nigeria (MANI)", phone: "+234 (0) 700 000 0123", href: "tel:+2347000000123", text: false },
     ],
   },
   US: {
-    name: "United States",
+    name: "United States 🇺🇸",
     hotlines: [
-      {
-        name: "National Suicide Prevention Lifeline",
-        phone: "988",
-        icon: PhoneCall,
-        color: "bg-red-500",
-      },
-      {
-        name: "SAMHSA National Helpline",
-        phone: "1-800-662-4357",
-        icon: MessageSquare,
-        color: "bg-teal-500",
-      },
-      {
-        name: "Crisis Text Line",
-        phone: "Text HOME to 741741",
-        icon: BookOpenText,
-        color: "bg-amber-700",
-      },
+      { name: "National Suicide Prevention Lifeline", phone: "988", href: "tel:988", text: false },
+      { name: "SAMHSA National Helpline", phone: "1-800-662-4357", href: "tel:18006624357", text: false },
+      { name: "Crisis Text Line", phone: "Text HOME to 741741", href: "sms:741741", text: true },
     ],
   },
   UK: {
-    name: "United Kingdom",
+    name: "United Kingdom 🇬🇧",
     hotlines: [
-      {
-        name: "Samaritans",
-        phone: "116 123",
-        icon: PhoneCall,
-        color: "bg-red-500",
-      },
-      {
-        name: "Mind Infoline",
-        phone: "0300 123 3393",
-        icon: MessageSquare,
-        color: "bg-teal-500",
-      },
-      {
-        name: "Shout Crisis Text Line",
-        phone: "Text SHOUT to 85258",
-        icon: BookOpenText,
-        color: "bg-amber-700",
-      },
+      { name: "Samaritans", phone: "116 123", href: "tel:116123", text: false },
+      { name: "Mind Infoline", phone: "0300 123 3393", href: "tel:03001233393", text: false },
+      { name: "Shout Crisis Text Line", phone: "Text SHOUT to 85258", href: "sms:85258", text: true },
     ],
   },
   CA: {
-    name: "Canada",
+    name: "Canada 🇨🇦",
     hotlines: [
-      {
-        name: "Canada Suicide Prevention Service",
-        phone: "1-833-456-4566",
-        icon: PhoneCall,
-        color: "bg-red-500",
-      },
-      {
-        name: "Talk Suicide Canada",
-        phone: "1-833-456-4566",
-        icon: MessageSquare,
-        color: "bg-teal-500",
-      },
-      {
-        name: "Crisis Text Line Canada",
-        phone: "Text HELLO to 741741",
-        icon: BookOpenText,
-        color: "bg-amber-700",
-      },
+      { name: "Canada Suicide Prevention Service", phone: "1-833-456-4566", href: "tel:18334564566", text: false },
+      { name: "Crisis Text Line Canada", phone: "Text HELLO to 741741", href: "sms:741741", text: true },
+      { name: "Kids Help Phone", phone: "1-800-668-6868", href: "tel:18006686868", text: false },
     ],
   },
 };
 
+const faithResources = [
+  {
+    icon: BookMarked,
+    title: "Read the Bible",
+    description: "Start with Psalms 23, John 3, or Romans 8. God's word is alive and active.",
+    href: "https://www.bible.com",
+    cta: "Open Bible.com",
+    external: true,
+  },
+  {
+    icon: Heart,
+    title: "Christian Counseling",
+    description: "Contact your local church for pastoral care and faith-based counseling.",
+    href: "mailto:info@jesusbaby.com",
+    cta: "Email us",
+    external: false,
+  },
+  {
+    icon: Users,
+    title: "Join the Community",
+    description: "Share your testimony, pray with others, and grow together in Christ.",
+    href: "/share",
+    cta: "Share your story",
+    external: false,
+  },
+  {
+    icon: BookOpenText,
+    title: "Deliverance Resources",
+    description: "Curated materials on freedom, healing, and walking in the Spirit.",
+    href: "/library",
+    cta: "Visit the library",
+    external: false,
+  },
+];
+
+type CountryKey = keyof typeof countries;
+
 export default function ContactPage() {
-  const [selectedCountry, setSelectedCountry] =
-    useState<keyof typeof countries>("NG");
-  const countryData = countries[selectedCountry];
+  const [selectedCountry, setSelectedCountry] = useState<CountryKey>("NG");
+  const country = countries[selectedCountry];
 
   return (
-    <>
-      <div className="relative h-[calc(100dvh-64px)] w-full overflow-hidden scroll-snap-start">
-        <AnimatePresence mode="wait">
-          <motion.div
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.7 }}
-            className={`absolute inset-0 flex items-center justify-center`}
-          >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/20 z-5" />
+    <div className="min-h-screen bg-app-bg px-5 py-10 text-app-text sm:px-8 lg:px-12">
 
-            <motion.img
-              alt={"Contact Page Background"}
-              src={
-                "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c3VwcG9ydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"
-              }
-              className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
-            />
-
-            <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-              <motion.div
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
-              >
-                <Sparkles className="w-4 h-4 text-yellow-300" />
-                <span className="text-sm font-medium tracking-wide uppercase">
-                  Here For A Purpose
-                </span>
-              </motion.div>
-
-              <motion.h2
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
-              >
-                &#34;He Leads Me Besides{" "}
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-amber-700 to-yellow-600">
-                  The Still Waters
-                </span>&#34;
-              </motion.h2>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mt-8 text-slate-400 text-sm font-medium tracking-widest uppercase"
-              >
-                - Psalms 23 vs 4
-              </motion.div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1 }}
-        className="p-8 min-h-screen"
-      >
-        <div className="max-w-5xl space-y-3 mx-auto">
-          <div className="flex max-md:flex-col items-center justify-between mb-8">
-            <h2 className="text-4xl font-bold flex items-center max-md:mb-5 gap-3">
-              <PhoneCall className="w-8 h-8 text-red-500" />
-              Find Support and Guidance
-            </h2>
-
-            <select
-              title="Select Country"
-              value={selectedCountry}
-              onChange={(e) =>
-                setSelectedCountry(e.target.value as keyof typeof countries)
-              }
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-red-500"
-            >
-              {Object.entries(countries).map(([code, data]) => (
-                <option key={code} value={code}>
-                  {data.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <p className="text-lg text-gray-700 mb-8 p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
-            If you are in immediate distress, please reach out. You are not
-            alone. These resources provide immediate, confidential help.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div className="bg-white p-6 rounded-lg shadow-lg border-b-4 border-red-600">
-              <h3 className="text-2xl font-semibold text-red-700 mb-6">
-                Crisis Hotlines
-              </h3>
-              <div className="space-y-4">
-                {countryData.hotlines.map((item) => (
-                  <div
-                    key={item.name}
-                    className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-slate-100 hover:bg-slate-100 transition-colors"
-                  >
-                    <div className="flex items-center gap-4">
-                      <item.icon
-                        className={`w-6 h-6 ${item.color.replace(
-                          "bg-",
-                          "text-"
-                        )}`}
-                      />
-                      <div>
-                        <p className="font-semibold text-slate-800">
-                          {item.name}
-                        </p>
-                        <p className="text-sm text-slate-500">24/7 Support</p>
-                      </div>
-                    </div>
-                    <a
-                      href={
-                        item.phone.startsWith("Text")
-                          ? `sms:741741`
-                          : `tel:${item.phone.replace(/\D/g, "")}`
-                      }
-                      className={`px-4 py-2 rounded-full font-bold text-sm transition-all shadow-md ${item.color} text-white hover:opacity-90 whitespace-nowrap`}
-                    >
-                      {item.phone.startsWith("Text") ? "Text" : "Call"}
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-lg shadow-lg border-b-4 border-amber-700">
-              <h3 className="text-2xl font-semibold text-amber-800 mb-6">
-                Additional Support
-              </h3>
-              <ul className="space-y-4 text-gray-700">
-                <li>
-                  <span className="font-bold block mb-1">
-                    Christian Counseling
-                  </span>
-                  <p className="text-sm text-gray-600">
-                    Contact your local church for pastoral care and faith-based
-                    counseling recommendations.
-                  </p>
-                </li>
-                <li>
-                  <span className="font-bold block mb-1">
-                    Professional Help
-                  </span>
-                  <p className="text-sm text-gray-600">
-                    Seek guidance from licensed therapists and counselors in
-                    your area.
-                  </p>
-                </li>
-                <li>
-                  <span className="font-bold block mb-1">Support Groups</span>
-                  <p className="text-sm text-gray-600">
-                    Join community support groups for shared experiences and
-                    mutual encouragement.
-                  </p>
-                </li>
-                <li>
-                  <span className="font-bold block mb-1">Email Support</span>
-                  <a
-                    href="mailto:info@deliverance.com"
-                    className="text-amber-700 hover:underline text-sm"
-                  >
-                    info@deliverance.com
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
+      {/* Header */}
+      <header className="mb-10 border-b border-app-line pb-8">
+        <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-app-lime">
+          Deliverance &amp; Help
+        </p>
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <h1 className="max-w-2xl text-4xl font-black leading-tight tracking-tight text-app-text sm:text-6xl">
+            You are not alone.{" "}
+            <span className="text-app-lime">Help is here.</span>
+          </h1>
+          <blockquote className="max-w-xs text-sm leading-7 text-app-muted">
+            &ldquo;He leads me beside still waters. He restores my soul.&rdquo;
+            <cite className="mt-1 block not-italic text-xs font-bold uppercase tracking-widest text-app-muted3">
+              — Psalm 23:2–3
+            </cite>
+          </blockquote>
         </div>
-      </motion.div>
-    </>
+      </header>
+
+      <div className="grid gap-12 lg:grid-cols-2">
+
+        {/* Crisis Hotlines */}
+        <section>
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-app-muted3">
+                Immediate support
+              </p>
+              <h2 className="flex items-center gap-2 text-2xl font-black tracking-tight text-app-text">
+                <PhoneCall className="h-5 w-5 text-red-400" />
+                Crisis Hotlines
+              </h2>
+            </div>
+            <label className="flex items-center gap-2 border border-app-line bg-app-card px-3 py-2">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-app-muted3">Country</span>
+              <select
+                title="Select Country"
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value as CountryKey)}
+                className="bg-transparent text-sm font-semibold text-app-text outline-none"
+              >
+                {Object.entries(countries).map(([code, data]) => (
+                  <option key={code} value={code} className="bg-app-panel">{data.name}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          <div className="mb-5 border-l-2 border-red-500 py-2 pl-4 text-sm leading-6 text-app-muted">
+            If you are in immediate distress, please reach out. These resources provide confidential, 24/7 help.
+          </div>
+
+          <div className="space-y-2">
+            {country.hotlines.map((item, i) => (
+              <motion.div
+                key={item.name}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07 }}
+                className="flex items-center justify-between border border-app-line bg-app-card px-4 py-3"
+              >
+                <div>
+                  <p className="text-sm font-bold text-app-text">{item.name}</p>
+                  <p className="text-xs text-app-muted2">{item.phone}</p>
+                </div>
+                <a
+                  href={item.href}
+                  className="flex items-center gap-1.5 bg-app-lime px-3 py-1.5 text-xs font-bold text-app-bg transition-opacity hover:opacity-90"
+                >
+                  {item.text
+                    ? <><MessageSquare className="h-3 w-3" /> Text</>
+                    : <><PhoneCall className="h-3 w-3" /> Call</>
+                  }
+                </a>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Faith Resources */}
+        <section>
+          <div className="mb-6">
+            <p className="mb-1 text-xs font-bold uppercase tracking-[0.2em] text-app-muted3">
+              Faith &amp; community
+            </p>
+            <h2 className="text-2xl font-black tracking-tight text-app-text">
+              Additional Support
+            </h2>
+          </div>
+
+          <div className="space-y-2">
+            {faithResources.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <motion.a
+                  key={item.title}
+                  href={item.href}
+                  target={item.external ? "_blank" : undefined}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.07 }}
+                  className="group flex items-start gap-4 border border-app-line bg-app-card px-4 py-4 transition-colors hover:border-app-lime/40"
+                >
+                  <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center bg-app-lime-dim text-app-lime transition-colors group-hover:bg-app-lime group-hover:text-app-bg">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <div className="flex-1">
+                    <p className="text-sm font-bold text-app-text">{item.title}</p>
+                    <p className="mt-0.5 text-xs leading-5 text-app-muted2">{item.description}</p>
+                    <p className="mt-2 flex items-center gap-1 text-xs font-bold text-app-lime">
+                      {item.cta} <ArrowRight className="h-3 w-3" />
+                    </p>
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+
+      {/* Bottom verse */}
+      <div className="mt-16 border border-app-line bg-app-panel py-12 text-center">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-app-lime">
+          A word for you
+        </p>
+        <blockquote className="text-2xl font-black tracking-tight text-app-text sm:text-3xl">
+          &ldquo;Come to me, all who are weary and burdened,
+          <br className="hidden sm:block" /> and I will give you rest.&rdquo;
+        </blockquote>
+        <cite className="mt-3 block not-italic text-xs font-bold uppercase tracking-widest text-app-muted3">
+          — Matthew 11:28
+        </cite>
+      </div>
+    </div>
   );
 }
